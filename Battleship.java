@@ -28,6 +28,7 @@ class BattleshipTestDrive {
 class Battleship {
     private int[] locationCells;
     private int numOfHits = 0;
+    private final int hitValue = -1;
 
     public void setLocationCells(int[] locations){
         locationCells = locations;
@@ -37,9 +38,10 @@ class Battleship {
         int guess = Integer.parseInt(userGuess);
         String result = "miss";
 
-        for (int cell : locationCells) {
-            if (guess == cell) {
+        for (int i = 0; i < locationCells.length; i++) {
+            if (guess == locationCells[i]) {
                 result = "hit";
+                locationCells[i] = hitValue;
                 numOfHits++;
                 break;
             }
@@ -58,11 +60,13 @@ class InputReader {
     public String getUserInput(String prompt) {
         String userGuess = null;
         System.out.print(prompt + "  ");
+
         try{
+            String validValuePattern = "[0-7]";
             BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             userGuess = reader.readLine();
-            while (userGuess.length() == 0) {
-                System.out.print("Please enter a value:  ");
+            while (userGuess.length() == 0 || !userGuess.matches(validValuePattern)) {
+                System.out.print("Please enter a valid value:  ");
                 userGuess = reader.readLine();
             }
         } catch(IOException e) {
