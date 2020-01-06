@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.Random;
 
-class BattleshipTestDrive {
+public class BattleshipTestDrive {
     public static void main(String[] args) {
         int numOfGuesses = 0;
         InputReader inputReader = new InputReader();
